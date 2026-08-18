@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>PingCoach - Streamer</title>
+  <link rel="stylesheet" href="common.css" />
+</head>
+<body>
+  <div class="page">
+    <a class="back" href="launcher.html">&larr; Back</a>
+    <div class="brand"><span class="brand-dot"></span>Streamer</div>
+    <h1>Share your screen</h1>
+    <p class="subtitle">Your viewer will be able to ping it, and you'll see the marker appear right on top of whatever you're doing.</p>
+
+    <div id="setup-panel">
+      <label class="field-label" for="server-url">Signaling server address</label>
+      <input id="server-url" type="text" value="ws://localhost:8787" />
+      <p class="hint">This is the small relay server, not a screen-share provider. See the README for how to run or deploy one.</p>
+
+      <label class="field-label">What to share</label>
+      <p class="hint">Share your whole screen, or just one application - a specific game or browser window, say - so nothing else on your desktop is ever visible.</p>
+      <div id="sources"></div>
+
+      <label class="field-label" for="quality-select">Stream quality</label>
+      <select id="quality-select">
+        <option value="720p30">720p 30fps</option>
+        <option value="720p60">720p 60fps</option>
+        <option value="1080p30" selected>1080p 30fps</option>
+        <option value="1080p60">1080p 60fps</option>
+        <option value="1080p144">1080p 144fps</option>
+        <option value="1440p60">1440p 60fps</option>
+        <option value="1440p144">1440p 144fps</option>
+      </select>
+      <p class="hint">Higher quality looks sharper but uses more bandwidth and CPU. Your viewer can still choose to watch at a lower quality than this.</p>
+
+      <button id="start-btn" disabled>Start streaming</button>
+      <p id="setup-status" class="status"></p>
+    </div>
+
+    <div id="session-panel" class="hidden">
+      <p class="field-label">Room code &mdash; share this with your viewer</p>
+      <div class="room-code" id="room-code">------</div>
+      <p id="session-status" class="status">Waiting for your viewer to join&hellip;</p>
+      <video id="preview" autoplay muted playsinline></video>
+      <p class="hint">Stepping away to type a password or anything else private? Hit BRB first - it swaps your viewer's feed for a placeholder until you turn it back off.</p>
+      <div class="video-controls">
+        <button id="switch-source-btn">Change source</button>
+        <button id="brb-btn">BRB</button>
+        <button id="stop-btn" class="danger">Stop streaming</button>
+      </div>
+      <div id="switch-sources" class="hidden"></div>
+    </div>
+  </div>
+  <script src="../shared/webrtc-config.js"></script>
+  <script src="host.js"></script>
+</body>
+</html>

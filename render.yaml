@@ -1,0 +1,20 @@
+# Render Blueprint for the signaling server (the tiny relay that lets a host
+# and a viewer on different networks find each other and exchange the WebRTC
+# handshake - see signaling-server/server.js). It never sees the video stream
+# or the pings themselves, only the initial connection setup.
+#
+# Deploy: on render.com, "New +" -> "Blueprint" -> connect this repo. Render
+# reads this file and creates the service automatically. Once it's live,
+# Render gives you a URL like https://pingcoach-signaling.onrender.com -
+# use wss://pingcoach-signaling.onrender.com (Render terminates TLS for you)
+# as the "Signaling server address" in the PingCoach app.
+services:
+  - type: web
+    name: pingcoach-signaling
+    env: node
+    plan: free
+    buildCommand: cd signaling-server && npm install
+    startCommand: cd signaling-server && npm start
+    envVars:
+      - key: NODE_VERSION
+        value: 20

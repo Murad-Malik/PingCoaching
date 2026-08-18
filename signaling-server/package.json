@@ -1,0 +1,13 @@
+{
+  "name": "pingcoach-signaling-server",
+  "version": "0.1.0",
+  "description": "Tiny standalone WebSocket relay that lets one PingCoach host and one viewer find each other and exchange WebRTC signaling data. It never sees the video or ping data itself, only the connection handshake.",
+  "main": "server.js",
+  "private": true,
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "ws": "^8.18.0"
+  }
+}

@@ -1,0 +1,41 @@
+{
+     "name": "pingcoach",
+     "version": "0.1.0",
+     "description": "Standalone screen-pinging app for live coaching (games, work screenshares, anything) - no Discord or Overwolf required.",
+     "main": "main.js",
+     "private": true,
+     "scripts": {
+          "start": "electron .",
+          "server": "node signaling-server/server.js",
+          "pack": "electron-builder --dir",
+          "dist": "electron-builder"
+     },
+     "devDependencies": {
+          "electron": "^31.0.0",
+          "electron-builder": "^26.15.3"
+     },
+     "build": {
+          "appId": "com.pingcoach.app",
+          "productName": "PingCoach",
+          "directories": {
+               "output": "dist"
+          },
+          "files": [
+               "main.js",
+               "preload.js",
+               "windows/**/*",
+               "shared/**/*",
+               "assets/**/*",
+               "package.json",
+               "!windows/_*"
+          ],
+          "win": {
+               "target": "nsis"
+          },
+          "nsis": {
+               "oneClick": true,
+               "perMachine": false,
+               "createDesktopShortcut": true
+          }
+     }
+}

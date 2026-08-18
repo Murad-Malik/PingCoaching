@@ -1,0 +1,620 @@
+:root {
+  --bg: #0d0f13;
+  --bg-elevated: #161922;
+  --bg-elevated-2: #1e222d;
+  --border: #272c37;
+  --border-hover: #3a4150;
+  --text: #eef0f3;
+  --text-muted: #9aa1ad;
+  --text-faint: #5b6270;
+  --accent: #ffb020;
+  --accent-hover: #ffc04d;
+  --accent-ink: #241a04;
+  --danger: #ff5c5c;
+  --radius-lg: 14px;
+  --radius: 10px;
+  --radius-sm: 8px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border-hover);
+}
+
+.page {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 32px 32px 48px;
+}
+/* While actually watching a stream, let the video take up most of the window
+   instead of staying pinned to the narrow reading-width column used by the
+   setup/join forms - the window is also maximized on connect (see viewer.js)
+   so this has real room to work with even without going into full screen.
+   Scales with the window (94vw) instead of a fixed cap, with an upper bound
+   just to keep line lengths sane on an ultrawide monitor. Toggled via a body
+   class (not a :has() structural selector) so the later full-screen override
+   below reliably wins on specificity, not source luck. */
+body.is-watching .page {
+  max-width: min(94vw, 1800px);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--text-muted);
+  margin-bottom: 22px;
+}
+
+.brand-dot {
+  width: 8px;
+  height: 8px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px rgba(255, 176, 32, 0.15);
+}
+
+a.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  transition: color 0.15s ease;
+}
+a.back:hover {
+  color: var(--text);
+}
+
+h1 {
+  font-size: 25px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0 0 8px;
+}
+
+h2 {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0 0 6px;
+}
+
+.subtitle {
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0 0 30px;
+}
+
+.hint {
+  color: var(--text-faint);
+  font-size: 12.5px;
+  line-height: 1.55;
+  margin: 8px 0 0;
+}
+
+.field-label {
+  display: block;
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-muted);
+  margin: 22px 0 8px;
+}
+.field-label:first-child {
+  margin-top: 0;
+}
+
+input[type='text'] {
+  width: 100%;
+  padding: 11px 13px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-size: 14px;
+  font-family: inherit;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+input[type='text']::placeholder {
+  color: var(--text-faint);
+}
+input[type='text']:focus {
+  outline: none;
+  border-color: var(--accent);
+  background: var(--bg-elevated-2);
+}
+
+select {
+  width: 100%;
+  padding: 10px 13px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-size: 14px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+select:focus {
+  outline: none;
+  border-color: var(--accent);
+  background: var(--bg-elevated-2);
+}
+
+button {
+  display: block;
+  width: 100%;
+  padding: 12px 16px;
+  margin-top: 24px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-size: 14px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.05s ease, opacity 0.15s ease;
+}
+button:hover:not(:disabled) {
+  background: var(--accent-hover);
+}
+button:active:not(:disabled) {
+  transform: translateY(1px);
+}
+button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+button.danger {
+  background: transparent;
+  color: var(--danger);
+  border: 1px solid rgba(255, 92, 92, 0.35);
+}
+button.danger:hover:not(:disabled) {
+  background: rgba(255, 92, 92, 0.1);
+  border-color: var(--danger);
+}
+
+.status {
+  min-height: 18px;
+  font-size: 13px;
+  color: var(--text-muted);
+  margin: 12px 0 0;
+  line-height: 1.5;
+}
+
+.launcher-grid {
+  display: grid;
+  gap: 14px;
+  margin-top: 4px;
+}
+
+.mode-card {
+  display: block;
+  padding: 20px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  text-decoration: none;
+  color: var(--text);
+  transition: border-color 0.15s ease, background 0.15s ease, transform 0.1s ease;
+}
+.mode-card:hover {
+  border-color: var(--accent);
+  background: var(--bg-elevated-2);
+  transform: translateY(-1px);
+}
+.mode-card h2 {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.mode-card h2::before {
+  content: '';
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.mode-card p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 13.5px;
+  line-height: 1.55;
+}
+
+.sources {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(136px, 1fr));
+  gap: 10px;
+}
+
+.source-card {
+  cursor: pointer;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--bg-elevated);
+  transition: border-color 0.15s ease;
+}
+.source-card:hover {
+  border-color: var(--border-hover);
+}
+.source-card.selected {
+  border-color: var(--accent);
+}
+.source-card img {
+  display: block;
+  width: 100%;
+  height: 78px;
+  object-fit: cover;
+  background: #000;
+}
+.source-card .name {
+  padding: 6px 8px;
+  font-size: 11.5px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.source-card.selected .name {
+  color: var(--text);
+}
+
+.room-code {
+  font-family: 'Consolas', 'SF Mono', Menlo, monospace;
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-align: center;
+  padding: 18px 10px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--accent);
+}
+
+video {
+  width: 100%;
+  border-radius: var(--radius);
+  margin-top: 16px;
+  background: #000;
+  display: block;
+  object-fit: contain;
+  /* Video/image elements are natively draggable in Chromium by default. A real
+     click rarely lands pixel-perfect still - a little jitter between mousedown
+     and mouseup is enough for that to hijack the gesture into a native drag,
+     silently eating the click (and now would fight with click-and-drag-to-draw). */
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
+/* Holds the video and the (normally collapsed) notes panel side by side. Video
+   fills it alone by default; toggling notes-open splits it 80/20 without
+   touching the video's own width rule, since an explicit flex-basis always
+   wins over that regardless of source order. */
+#watch-stage {
+  display: flex;
+  align-items: stretch;
+  position: relative;
+}
+#watch-stage.notes-open {
+  gap: 12px;
+}
+/* 80% + 20% + the 12px gap between them would overflow the container by
+   exactly 12px, which is what was causing a horizontal scrollbar to appear -
+   split that 12px out of the two flex-basis values instead of adding it on top. */
+#watch-stage.notes-open video {
+  flex: 0 0 calc(80% - 6px);
+}
+
+/* Pings/lines drawn right here on the coach's own screen the instant they
+   click or drag - not dependent on round-tripping through the video (which
+   has real latency) or on the host's overlay window making it into whatever
+   they're capturing (which it won't if the host is sharing a single
+   application window rather than their whole screen). Sized to the whole
+   stage rather than just the video for simplicity; markers only ever land
+   within the video's own bounds anyway since that's the only clickable area. */
+#local-effects-layer,
+#local-draw-svg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+#local-draw-svg {
+  width: 100%;
+  height: 100%;
+}
+#local-draw-svg polyline {
+  opacity: 1;
+  transition: opacity 2s ease-out;
+}
+#local-draw-svg polyline.fade-out {
+  opacity: 0;
+}
+
+.local-ping {
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  margin-left: -32px;
+  margin-top: -32px;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.local-ping .ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 4px solid var(--ping-color, #ffcc33);
+  animation: local-ping-expand 1.1s cubic-bezier(0.15, 0.6, 0.35, 1) forwards;
+}
+.local-ping .core {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 14px;
+  height: 14px;
+  margin-left: -7px;
+  margin-top: -7px;
+  border-radius: 50%;
+  background: var(--ping-color, #ffcc33);
+  box-shadow: 0 0 16px 4px var(--ping-color, #ffcc33);
+  animation: local-ping-core-fade 1.1s ease-out forwards;
+}
+@keyframes local-ping-expand {
+  0%   { transform: scale(0.2); opacity: 0; border-width: 10px; }
+  15%  { opacity: 1; }
+  100% { transform: scale(1.6); opacity: 0; border-width: 1px; }
+}
+@keyframes local-ping-core-fade {
+  0%   { transform: scale(0); opacity: 1; }
+  20%  { transform: scale(1); opacity: 1; }
+  100% { transform: scale(1); opacity: 0; }
+}
+
+#notes-box {
+  display: none;
+  flex: 0 0 calc(20% - 6px);
+  min-width: 160px;
+  margin-top: 16px;
+  padding: 12px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 13px;
+  line-height: 1.55;
+  resize: none;
+}
+#notes-box::placeholder {
+  color: var(--text-faint);
+}
+#notes-box:focus {
+  outline: none;
+  border-color: var(--accent);
+  background: var(--bg-elevated-2);
+}
+#watch-stage.notes-open #notes-box {
+  display: block;
+}
+
+/* Window-level fullscreen (toggled by viewer.js via main.js, not the browser's
+   element Fullscreen API - see the comments there for why). Everything but the
+   video and our own floating controls gets out of the way. */
+body.is-fullscreen {
+  overflow: hidden;
+}
+body.is-fullscreen .page {
+  max-width: none;
+  padding: 0;
+}
+body.is-fullscreen .back,
+body.is-fullscreen .brand,
+body.is-fullscreen h1,
+body.is-fullscreen .subtitle,
+body.is-fullscreen #watch-status,
+body.is-fullscreen .video-toolbar,
+body.is-fullscreen p.hint {
+  display: none;
+}
+body.is-fullscreen video {
+  width: 100vw;
+  height: 100vh;
+  margin-top: 0;
+  border-radius: 0;
+}
+/* Percentages need a sized container to resolve against, which #watch-stage
+   doesn't have in full screen (its width is just whatever its content needs).
+   vw sidesteps that by being relative to the viewport directly instead. Gap
+   is dropped here (the border below separates the panels instead) since
+   80vw + 20vw already exactly fills the viewport - adding a gap on top of
+   that would push 12px of the notes panel off-screen. */
+body.is-fullscreen #watch-stage.notes-open {
+  gap: 0;
+}
+body.is-fullscreen #watch-stage.notes-open video {
+  /* flex-basis alone computes correctly here (confirmed via devtools) but
+     Chromium doesn't actually apply it to a replaced element's rendered box
+     in this configuration - setting width directly is what actually sticks. */
+  width: 80vw;
+  flex-basis: 80vw;
+  height: 100vh;
+}
+body.is-fullscreen #watch-stage.notes-open #notes-box {
+  width: 20vw;
+  flex-basis: 20vw;
+  height: 100vh;
+  margin-top: 0;
+  border-radius: 0;
+  border-top: none;
+  border-right: none;
+  border-bottom: none;
+}
+
+/* One floating cluster bottom-center, instead of separate corners - reads as a
+   single control bar rather than scattered pieces. Dimmed until hovered so it
+   stays out of the way of the stream otherwise. */
+body.is-fullscreen #watch-controls-dock {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  z-index: 20;
+  opacity: 0.55;
+  transition: opacity 0.15s ease;
+}
+body.is-fullscreen #watch-controls-dock:hover {
+  opacity: 1;
+}
+body.is-fullscreen .ping-color-toolbar {
+  margin: 0;
+  padding: 9px 12px;
+  background: rgba(13, 15, 19, 0.7);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  backdrop-filter: blur(8px);
+}
+body.is-fullscreen .ping-color-toolbar .field-label {
+  display: none;
+}
+body.is-fullscreen .video-controls {
+  margin: 0;
+  width: auto;
+}
+body.is-fullscreen .video-controls button {
+  width: auto;
+  padding: 10px 14px;
+}
+
+.video-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 14px;
+}
+.video-toolbar .field-label {
+  margin: 0;
+  white-space: nowrap;
+}
+.video-toolbar select {
+  flex: 1;
+}
+
+.ping-color-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 14px;
+}
+.ping-color-toolbar .field-label {
+  margin: 0;
+  white-space: nowrap;
+}
+
+.color-swatches {
+  display: flex;
+  gap: 10px;
+}
+.color-swatch {
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-radius: 50%;
+  background: var(--swatch-color);
+  box-shadow: 0 0 0 1px var(--border) inset;
+  cursor: pointer;
+  transition: transform 0.1s ease, box-shadow 0.15s ease;
+}
+.color-swatch:hover:not(:disabled) {
+  background: var(--swatch-color);
+  transform: scale(1.12);
+}
+.color-swatch.selected {
+  box-shadow: 0 0 0 2px var(--bg-elevated), 0 0 0 4px var(--swatch-color);
+}
+
+.video-controls {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+}
+.video-controls button {
+  margin-top: 0;
+}
+.video-controls button:not(.danger) {
+  background: var(--bg-elevated-2);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+.video-controls button:not(.danger):hover:not(:disabled) {
+  background: #262b38;
+  border-color: var(--border-hover);
+}
+/* Whether the viewer can currently see the real screen or not is exactly the
+   kind of state that shouldn't be easy to lose track of - make it unmissable. */
+.video-controls button.active {
+  background: var(--accent);
+  color: var(--accent-ink);
+  border-color: var(--accent);
+}
+.video-controls button.active:hover:not(:disabled) {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+}
+
+.hidden {
+  display: none !important;
+}

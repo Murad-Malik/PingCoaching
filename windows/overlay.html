@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>PingCoach Overlay</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      overflow: hidden;
+      /* This window is click-through (see main.js setIgnoreMouseEvents), so pointer
+         events here are purely cosmetic, but keep them off just in case. */
+      pointer-events: none;
+      user-select: none;
+    }
+
+    #stage {
+      position: absolute;
+      inset: 0;
+    }
+
+    #draw-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    #draw-svg polyline {
+      opacity: 1;
+      transition: opacity 2s ease-out;
+    }
+    #draw-svg polyline.fade-out {
+      opacity: 0;
+    }
+
+    .ping {
+      position: absolute;
+      width: 64px;
+      height: 64px;
+      margin-left: -32px;
+      margin-top: -32px;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .ping .ring {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 4px solid var(--ping-color, #ffcc33);
+      animation: ping-expand 1.1s cubic-bezier(0.15, 0.6, 0.35, 1) forwards;
+    }
+
+    .ping .core {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 14px;
+      height: 14px;
+      margin-left: -7px;
+      margin-top: -7px;
+      border-radius: 50%;
+      background: var(--ping-color, #ffcc33);
+      box-shadow: 0 0 16px 4px var(--ping-color, #ffcc33);
+      animation: ping-core-fade 1.1s ease-out forwards;
+    }
+
+    @keyframes ping-expand {
+      0%   { transform: scale(0.2); opacity: 0; border-width: 10px; }
+      15%  { opacity: 1; }
+      100% { transform: scale(1.6); opacity: 0; border-width: 1px; }
+    }
+
+    @keyframes ping-core-fade {
+      0%   { transform: scale(0); opacity: 1; }
+      20%  { transform: scale(1); opacity: 1; }
+      100% { transform: scale(1); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div id="stage"></div>
+  <svg id="draw-svg"></svg>
+  <script src="overlay.js"></script>
+</body>
+</html>

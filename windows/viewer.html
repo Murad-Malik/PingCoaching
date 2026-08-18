@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>PingCoach - Viewer</title>
+  <link rel="stylesheet" href="common.css" />
+</head>
+<body>
+  <div class="page">
+    <a class="back" href="launcher.html">&larr; Back</a>
+    <div class="brand"><span class="brand-dot"></span>Viewer</div>
+    <h1>Join as viewer</h1>
+    <p class="subtitle">Enter the room code from the streamer you want to watch. Once connected, click anywhere on their screen below to ping it &mdash; you'll see the marker right away, and so will they.</p>
+
+    <div id="join-panel">
+      <label class="field-label" for="server-url">Signaling server address</label>
+      <input id="server-url" type="text" value="ws://localhost:8787" />
+
+      <label class="field-label" for="room-input">Room code</label>
+      <input id="room-input" type="text" maxlength="6" placeholder="e.g. K3F9QZ" style="text-transform: uppercase; letter-spacing: 4px; font-weight: 700;" />
+
+      <button id="join-btn">Join session</button>
+      <p id="join-status" class="status"></p>
+    </div>
+
+    <div id="watch-panel" class="hidden">
+      <p id="watch-status" class="status">Waiting for the streamer...</p>
+      <div class="video-toolbar">
+        <label class="field-label" for="quality-select">Quality</label>
+        <select id="quality-select">
+          <option value="auto" selected>Auto</option>
+          <option value="high">High</option>
+          <option value="medium">Medium</option>
+          <option value="low">Low (data saver)</option>
+        </select>
+      </div>
+      <p id="quality-status" class="hint"></p>
+      <div id="watch-stage">
+        <video id="remote-video" autoplay playsinline tabindex="-1" draggable="false" disablePictureInPicture disableRemotePlayback oncontextmenu="return false"></video>
+        <div id="local-effects-layer"></div>
+        <svg id="local-draw-svg"></svg>
+        <textarea id="notes-box" placeholder="Notes..."></textarea>
+      </div>
+      <p class="hint">Click anywhere on the video above to send a ping. Hold and drag to draw a line.</p>
+      <div id="watch-controls-dock">
+        <div class="ping-color-toolbar">
+          <span class="field-label">Ping color</span>
+          <div class="color-swatches" id="color-swatches">
+            <button type="button" class="color-swatch selected" data-color="#3b82f6" style="--swatch-color: #3b82f6" aria-label="Blue"></button>
+            <button type="button" class="color-swatch" data-color="#22c55e" style="--swatch-color: #22c55e" aria-label="Green"></button>
+            <button type="button" class="color-swatch" data-color="#ef4444" style="--swatch-color: #ef4444" aria-label="Red"></button>
+            <button type="button" class="color-swatch" data-color="#eab308" style="--swatch-color: #eab308" aria-label="Yellow"></button>
+          </div>
+        </div>
+        <div class="video-controls">
+          <button id="notes-btn">Notes</button>
+          <button id="fullscreen-btn">Full screen</button>
+          <button id="leave-btn" class="danger">Leave session</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="../shared/webrtc-config.js"></script>
+  <script src="viewer.js"></script>
+</body>
+</html>
