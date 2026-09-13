@@ -16,6 +16,7 @@ function createLauncherWindow() {
     minHeight: 520,
     resizable: true,
     title: 'PointCue',
+    icon: path.join(__dirname, 'assets', 'icon.png'),
     backgroundColor: '#0d0f13',
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
