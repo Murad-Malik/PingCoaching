@@ -145,6 +145,40 @@ h2 {
   margin-top: 0;
 }
 
+/* Collapsed by default - the signaling server address is real infrastructure,
+   but showing a raw URL up front makes the whole page feel more technical
+   than the one decision (what to share) that most people actually need to make. */
+.advanced-settings {
+  margin-top: 24px;
+}
+.advanced-settings summary {
+  cursor: pointer;
+  color: var(--text-muted);
+  font-size: 12.5px;
+  font-weight: 600;
+  list-style: none;
+  user-select: none;
+}
+.advanced-settings summary::-webkit-details-marker {
+  display: none;
+}
+.advanced-settings summary::before {
+  content: '\25b8';
+  display: inline-block;
+  width: 12px;
+  margin-right: 4px;
+  transition: transform 0.15s ease;
+}
+.advanced-settings[open] summary::before {
+  transform: rotate(90deg);
+}
+.advanced-settings summary:hover {
+  color: var(--text);
+}
+.advanced-settings .field-label:first-of-type {
+  margin-top: 16px;
+}
+
 input[type='text'] {
   width: 100%;
   padding: 11px 13px;

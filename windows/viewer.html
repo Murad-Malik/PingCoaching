@@ -13,14 +13,17 @@
     <p class="subtitle">Enter the room code from the streamer you want to watch. Once connected, click anywhere on their screen below to ping it &mdash; you'll see the marker right away, and so will they.</p>
 
     <div id="join-panel">
-      <label class="field-label" for="server-url">Signaling server address</label>
-      <input id="server-url" type="text" value="wss://pingcoach-signaling.onrender.com" />
-
       <label class="field-label" for="room-input">Room code</label>
       <input id="room-input" type="text" maxlength="6" placeholder="e.g. K3F9QZ" style="text-transform: uppercase; letter-spacing: 4px; font-weight: 700;" />
 
       <button id="join-btn">Join session</button>
       <p id="join-status" class="status"></p>
+
+      <details class="advanced-settings">
+        <summary>Advanced settings</summary>
+        <label class="field-label" for="server-url">Signaling server address</label>
+        <input id="server-url" type="text" value="wss://pingcoach-signaling.onrender.com" />
+      </details>
     </div>
 
     <div id="watch-panel" class="hidden">
