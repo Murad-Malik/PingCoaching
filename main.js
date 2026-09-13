@@ -15,7 +15,7 @@ function createLauncherWindow() {
     minWidth: 460,
     minHeight: 520,
     resizable: true,
-    title: 'PingCoach',
+    title: 'PointCue',
     backgroundColor: '#0d0f13',
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),

@@ -1,4 +1,4 @@
-# PingCoach
+# PointCue
 
 A standalone desktop app for pinging a marker onto someone else's screen in real
 time while you coach them, whether that's a League of Legends match, another
@@ -32,12 +32,12 @@ Host app  <==========  WebRTC: video + pings, peer-to-peer, once connected  ====
 ## Project layout
 
 ```
-pingcoach/
+pointcue/
   main.js                 Electron main process: creates windows, manages the
                            overlay, exposes desktopCapturer to renderers
   preload.js               The safe, explicit API exposed to every window
   windows/
-    launcher.html           Pick "I'm being coached" or "I'm coaching"
+    launcher.html           Pick "I'm the Streamer" or "I'm the Viewer"
     host.html / host.js      Screen capture + WebRTC host logic
     viewer.html / viewer.js  Join a room, watch the stream, send pings
     overlay.html / overlay.js  The transparent click-through ping renderer
@@ -61,15 +61,15 @@ pingcoach/
 
 2. In a second terminal, install and start the app:
    ```
-   cd pingcoach
+   cd pointcue
    npm install
    npm start
    ```
-   This opens the launcher window. Click "I'm being coached," pick a screen,
-   and click "Start hosting." A 6-character room code appears.
+   This opens the launcher window. Click "I'm the Streamer," pick a screen,
+   and click "Start streaming." A 6-character room code appears.
 
 3. Run `npm start` again (a second instance) to open a second launcher window,
-   click "I'm coaching," leave the server address as `ws://localhost:8787`,
+   click "I'm the Viewer," leave the server address as `ws://localhost:8787`,
    type in the room code, and click "Join session." Click anywhere on the
    video to send a ping - you should see it appear on the host window's real
    screen almost instantly.
@@ -101,7 +101,7 @@ npm install
 npm run dist
 ```
 
-That produces `dist/PingCoach Setup <version>.exe` - a standard installer
+That produces `dist/PointCue Setup <version>.exe` - a standard installer
 someone can just double-click, with a Start Menu shortcut and an uninstaller,
 no Node or terminal required on their end. (`npm run pack` builds the
 unpacked app to `dist/win-unpacked/` instead, without the installer wrapper -
