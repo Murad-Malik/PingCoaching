@@ -131,6 +131,9 @@ h2 {
   line-height: 1.55;
   margin: 8px 0 0;
 }
+.hint.reassurance {
+  margin-bottom: 20px;
+}
 
 .field-label {
   display: block;
