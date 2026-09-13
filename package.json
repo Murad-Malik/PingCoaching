@@ -1,6 +1,6 @@
 {
      "name": "pointcue",
-     "version": "0.1.0",
+     "version": "0.2.0",
      "description": "Standalone screen-pinging app for live coaching (games, work screenshares, anything) - no Discord or Overwolf required.",
      "main": "main.js",
      "private": true,
