@@ -11,7 +11,7 @@ let overlayWindow = null;
 function createLauncherWindow() {
   launcherWindow = new BrowserWindow({
     width: 560,
-    height: 760,
+    height: 1100,
     minWidth: 460,
     minHeight: 520,
     resizable: true,
